@@ -55,10 +55,7 @@ export class NotificationProcessor {
       post,
       subscriber,
     });
-    if (
-      sendMail.accepted[0] !== subscriber.email ||
-      sendMail.rejected[0] === subscriber.email
-    ) {
+    if (sendMail.accepted[0] !== subscriber.email || sendMail.rejected[0]) {
       throw new HttpException(
         'Email not sent to subscriber',
         HttpStatus.BAD_REQUEST,
