@@ -7,12 +7,16 @@ import {
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { plainToInstance } from 'class-transformer';
+import { OkResponse } from '../utils/base.controller';
 
 interface ClassConstructor {
   new (...args: any[]): object;
 }
 export class SerializeInterceptor implements NestInterceptor {
-  constructor(private dto: ClassConstructor) {}
+  constructor(
+    private message: string,
+    private dto: ClassConstructor,
+  ) {}
   intercept(
     context: ExecutionContext,
     next: CallHandler<any>,
@@ -29,12 +33,13 @@ export class SerializeInterceptor implements NestInterceptor {
         const transformedData = plainToInstance(this.dto, data, {
           excludeExtraneousValues: true,
         });
-        return transformedData;
+        return new OkResponse(this.message, transformedData);
+        //  return transformedData;
       }),
     );
   }
 }
 
-export function Serialize(dto: any) {
-  return UseInterceptors(new SerializeInterceptor(dto));
+export function Serialize(message: string, dto: any) {
+  return UseInterceptors(new SerializeInterceptor(message, dto));
 }

@@ -22,17 +22,31 @@ export class PostsService {
   async findAll(): Promise<Post[]> {
     return await this.postRepository.findAll({
       where: { published: true },
-      include: [User, Comment],
+      include: [
+        {
+          model: User,
+          attributes: { exclude: ['password'] },
+        },
+        Comment,
+      ],
     });
   }
 
   async findOne(id: number): Promise<Post> {
-    const post = await this.postRepository.findByPk(id, {
-      include: [User, Comment],
+    const post = await Post.findByPk(id, {
+      include: [
+        {
+          model: User,
+          attributes: { exclude: ['password'] },
+        },
+        Comment,
+      ],
     });
+
     if (!post) {
       throw new HttpException('Post not found', HttpStatus.NOT_FOUND);
     }
+
     return post;
   }
 
