@@ -1,6 +1,11 @@
 ## Description
 
 Using NestJs framework, postgresQL database and sequelize ORM, create a simple CRUD API for a microblog.
+Your API implementation should include the following functionalities:
+● Ability to insert, read, update, and delete a blog post and its associated comments. 
+● Ability to approve and decline a post before it is published.
+● Ability to comment on a blog post.
+● Ability to notify blog subscribers of a new blog post (Using queues and schedulers).
 
 ## Installation
 
@@ -24,25 +29,10 @@ $ npm run start:prod
 ## Test
 
 ```bash
-# unit tests
-$ npm run test
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
-## Support
 
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
-## License
-
-Nest is [MIT licensed](LICENSE).
